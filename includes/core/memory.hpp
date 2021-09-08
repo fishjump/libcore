@@ -4,9 +4,10 @@
 
 namespace core {
 
-void *memset(void *dest, const core::uint8_t &value,
-             const core::size_t &count);
-void *memcpy(void *dest, const void *&src, const core::size_t &count);
+inline void *memset(void *dest, const core::uint8_t &value,
+                    const core::size_t &count);
+inline void *memcpy(void *dest, const void *&src,
+                    const core::size_t &count);
 
 } // namespace core
 

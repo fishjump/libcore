@@ -3,6 +3,7 @@
 #include <core/stdint.hpp>
 
 namespace core {
+
 struct bitmap_t {
     core::uint8_t *_buffer;
     core::size_t   _size;
@@ -11,16 +12,19 @@ struct bitmap_t {
     constexpr bool operator[](const core::size_t &pos) const;
 
     // Capacity
-    constexpr core::size_t size() const;
+    constexpr core::size_t size() const;     // size in bits
+    constexpr core::size_t capacity() const; // size in bytes
 
     // Modifiers
-    bitmap_t &set(const core::size_t &pos, const bool &value = true);
-    bitmap_t &reset(const core::size_t &pos);
-    bitmap_t &flip(const core::size_t &pos);
+    inline bitmap_t &set(const core::size_t &pos,
+                         const bool &        value = true);
+    inline bitmap_t &reset(const core::size_t &pos);
+    inline bitmap_t &flip(const core::size_t &pos);
 
     // Conversions
-    char *to_string(char *buffer, const core::size_t &size) const;
+    inline char *to_string(char *buffer, const core::size_t &size) const;
 };
+
 } // namespace core
 
 constexpr bool core::bitmap_t::operator[](const core::size_t &pos) const {
@@ -30,6 +34,10 @@ constexpr bool core::bitmap_t::operator[](const core::size_t &pos) const {
 
 constexpr core::size_t core::bitmap_t::size() const {
     return this->_size;
+}
+
+constexpr core::size_t core::bitmap_t::capacity() const {
+    return this->_size / 8;
 }
 
 core::bitmap_t &core::bitmap_t::set(const core::size_t &pos,
